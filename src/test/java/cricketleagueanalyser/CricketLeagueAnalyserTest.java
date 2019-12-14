@@ -5,6 +5,7 @@ import org.junit.Test;
 public class CricketLeagueAnalyserTest {
     private static final String IPL2019_SHEET_MOSTRUNS = "/home/admin1/Desktop/CricketLeagueAnalyser/src/test/resources/IPL2019FactsheetMostRuns.csv";
     private static final String WRONG_FILE_PATH="/./CricketLeagueAnalyser/src/test/resources/IPL2019FactsheetMostRuns.csv";
+    private static final String INCORRECT_HEADER_FILE="/./CricketLeagueAnalyser/src/test/resources/IPL2019FactsheetMostRunsInCorrectHeader.csv";
 
     @Test
     public void givenMethodFor_ReturningCorrectRecordsFrom_IPL2019MostRunsCSV(){
@@ -32,7 +33,17 @@ public class CricketLeagueAnalyserTest {
     public void givenMethodFor_IfPassingFileContainIncorrectHeaderThrowsException(){
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
-            cricketLeagueAnalyser.loadIplMostRunCSV(WRONG_FILE_PATH);
+            cricketLeagueAnalyser.loadIplMostRunCSV(INCORRECT_HEADER_FILE);
+        } catch (CricketLeagueAnalyserException e) {
+            Assert.assertEquals(CricketLeagueAnalyserException.ExceptionType.ERROR_WHILE_LOADING,e.type);
+        }
+    }
+
+    @Test
+    public void givenMethodFor_IfPassingFileContainInCorrectDelimeterThrowsException(){
+        try {
+            CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
+            cricketLeagueAnalyser.loadIplMostRunCSV(INCORRECT_HEADER_FILE);
         } catch (CricketLeagueAnalyserException e) {
             Assert.assertEquals(CricketLeagueAnalyserException.ExceptionType.ERROR_WHILE_LOADING,e.type);
         }
