@@ -20,10 +20,11 @@ public class CricketLeagueAnalyser {
             Iterable<IPLMostRunsCSV> csvIterable = () -> censusCSVIterator;
             int numOfPlayers = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
             return numOfPlayers;
-        } catch (IOException e) {
-            throw new CricketLeagueAnalyserException(e.getMessage(),CricketLeagueAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
-        }
+        } catch (RuntimeException | IOException e) {
+            throw new CricketLeagueAnalyserException(e.getMessage(), CricketLeagueAnalyserException.ExceptionType.ERROR_WHILE_LOADING);
 
+
+        }
     }
 }
 
