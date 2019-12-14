@@ -8,15 +8,17 @@ public class IPLMostRuns2019DAO {
     public int fifty;
     public int getNoOffours;
     public int getNoOfSixs;
+    public int Avg;
 
-    public IPLMostRuns2019DAO(IPLMostRunsCSV censusCSV) {
-        this.position=censusCSV.position;
-        this.player=censusCSV.player;
-        this.runs=censusCSV.runs;
-        this.century=censusCSV.century;
-        this.fifty=censusCSV.fifty;
-        this.getNoOffours=censusCSV.noOffours;
-        this.getNoOfSixs=censusCSV.noOfSixs;
+    public IPLMostRuns2019DAO(IPLMostRunsCSV iplDataCSV) {
+        this.position=iplDataCSV.position;
+        this.player=iplDataCSV.player;
+        this.runs=iplDataCSV.runs;
+        this.century=iplDataCSV.century;
+        this.fifty=iplDataCSV.fifty;
+        this.getNoOffours=iplDataCSV.noOffours;
+        this.getNoOfSixs=iplDataCSV.noOfSixs;
+        this.Avg=iplDataCSV.Average;
 
     }
 }
