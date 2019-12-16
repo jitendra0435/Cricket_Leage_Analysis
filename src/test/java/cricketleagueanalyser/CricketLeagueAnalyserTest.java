@@ -1,4 +1,5 @@
 package cricketleagueanalyser;
+import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,7 +12,7 @@ public class CricketLeagueAnalyserTest {
     public void givenMethodFor_ReturningCorrectRecordsFrom_IPL2019MostRunsCSV(){
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
-                int records=cricketLeagueAnalyser.loadIplMostRunCSV(IPL2019_SHEET_MOSTRUNS);
+            int records=cricketLeagueAnalyser.loadIplMostRunCSV(IPL2019_SHEET_MOSTRUNS);
             Assert.assertEquals(100,records);
         } catch (CricketLeagueAnalyserException e) {
             e.printStackTrace();
@@ -55,6 +56,19 @@ public class CricketLeagueAnalyserTest {
             cricketLeagueAnalyser.loadIplMostRunCSV("./home");
         } catch (CricketLeagueAnalyserException e) {
             Assert.assertEquals(CricketLeagueAnalyserException.ExceptionType.ERROR_WHILE_LOADING,e.type);
+        }
+    }
+
+    @Test
+    public void givenMethodFor_ReturningTopBattingAveragesFromIPL2019(){
+        try {
+            CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
+            cricketLeagueAnalyser.loadIplMostRunCSV(IPL2019_SHEET_MOSTRUNS);
+            String sortedData=cricketLeagueAnalyser. getTopAverageBattingPlayerName(EnumField.STRIKERATES);
+            IPLMostRuns2019DAO[] censusCSV = new Gson().fromJson(sortedData,IPLMostRuns2019DAO[].class);
+            Assert.assertEquals("Ishant Sharma", censusCSV[0].player);
+        } catch (CricketLeagueAnalyserException e) {
+            e.printStackTrace();
         }
     }
 }
