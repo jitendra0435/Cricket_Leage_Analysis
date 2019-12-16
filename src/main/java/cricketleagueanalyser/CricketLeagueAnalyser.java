@@ -1,4 +1,5 @@
 package cricketleagueanalyser;
+import com.google.gson.Gson;
 import csvbuilder.CSVBuilderException;
 import csvbuilder.CSVBuilderFactory;
 import csvbuilder.ICSVBuilder;
@@ -8,9 +9,17 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.StreamSupport;
+import static java.util.stream.Collectors.toCollection;
 
 public class CricketLeagueAnalyser {
     Map<String, IPLMostRuns2019DAO> playerHashmap = new HashMap<>();
+    Map<EnumField,Comparator<IPLMostRuns2019DAO>> fieldNameComparatorMap=null;
+
+    public CricketLeagueAnalyser() {
+        this.fieldNameComparatorMap=new HashMap();
+        this.fieldNameComparatorMap.put(EnumField.STRIKERATES,Comparator.comparing(census->census.StrikeRate,Comparator.reverseOrder()));
+    }
+
     public int loadIplMostRunCSV(String iplMostRunsCSVFilepath) throws CricketLeagueAnalyserException {
         try (Reader reader = Files.newBufferedReader(Paths.get(iplMostRunsCSVFilepath))) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
@@ -27,5 +36,17 @@ public class CricketLeagueAnalyser {
                     CricketLeagueAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         }
         return playerHashmap.size();
+    }
+
+    public String getTopAverageBattingPlayerName(EnumField field) throws CricketLeagueAnalyserException {
+        if (playerHashmap == null || playerHashmap.size() == 0) {
+            throw new CricketLeagueAnalyserException("No Data", CricketLeagueAnalyserException
+                    .ExceptionType.CENSUS_FILE_PROBLEM);
+        }
+        ArrayList arrayList = playerHashmap.values().stream()
+                .sorted(this.fieldNameComparatorMap.get(field))
+                .collect(toCollection(ArrayList::new));
+        String sortedStateCensus = new Gson().toJson(arrayList);
+        return sortedStateCensus;
     }
 }

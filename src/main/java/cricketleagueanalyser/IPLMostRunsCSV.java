@@ -21,6 +21,9 @@ public class IPLMostRunsCSV {
     @CsvBindByName(column = "Avg",required =true)
     public Double Average;
 
+    @CsvBindByName(column = "SR",required =  true)
+    public double StrikeRate;
+
     @Override
     public String toString() {
         return "IPLMostRunsCSV{" +
@@ -32,6 +35,7 @@ public class IPLMostRunsCSV {
                 ", noOffours=" + noOffours +
                 ", noOfSixs=" + noOfSixs +
                 ", Average=" + Average +
+                ", StrikeRate=" + StrikeRate +
                 '}';
     }
 }

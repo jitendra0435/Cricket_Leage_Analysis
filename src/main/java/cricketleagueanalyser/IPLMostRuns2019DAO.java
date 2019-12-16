@@ -9,6 +9,7 @@ public class IPLMostRuns2019DAO {
     public int getNoOffours;
     public int getNoOfSixs;
     public Double Avg;
+    public double StrikeRate;
 
     public IPLMostRuns2019DAO(IPLMostRunsCSV iplDataCSV) {
         this.position=iplDataCSV.position;
@@ -19,6 +20,7 @@ public class IPLMostRuns2019DAO {
         this.getNoOffours=iplDataCSV.noOffours;
         this.getNoOfSixs=iplDataCSV.noOfSixs;
         this.Avg=iplDataCSV.Average;
+        this.StrikeRate=iplDataCSV.StrikeRate;
 
     }
 }
