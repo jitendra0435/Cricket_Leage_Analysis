@@ -97,4 +97,17 @@ public class CricketLeagueAnalyserTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenMethodFor_ReturningPlayerWhoHadMaximum_StrikeRatewithSixesandFours(){
+        try {
+            CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
+            cricketLeagueAnalyser.loadIplMostRunCSV(IPL2019_SHEET_MOSTRUNS);
+            String sortedData=cricketLeagueAnalyser.getSortedPlayerNameByField(EnumField.StrikeRateSixesAndFours);
+            IPLMostRuns2019DAO[] censusCSV=new Gson().fromJson(sortedData,IPLMostRuns2019DAO[].class);
+            Assert.assertEquals("Andre Russell",censusCSV[0].player);
+        } catch (CricketLeagueAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
 }
