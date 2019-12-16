@@ -110,4 +110,18 @@ public class CricketLeagueAnalyserTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenMethoFor_ReturningGreatAverage_WithbestStrikeRate(){
+        try {
+            CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
+            cricketLeagueAnalyser.loadIplMostRunCSV(IPL2019_SHEET_MOSTRUNS);
+            String sortedData=cricketLeagueAnalyser.getSortedPlayerNameByField(EnumField.StrikeRateWithAvg);
+            IPLMostRuns2019DAO[] censusCSV=new Gson().fromJson(sortedData,IPLMostRuns2019DAO[].class);
+            Assert.assertEquals("MS Dhoni",censusCSV[0].player);
+        } catch (CricketLeagueAnalyserException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
