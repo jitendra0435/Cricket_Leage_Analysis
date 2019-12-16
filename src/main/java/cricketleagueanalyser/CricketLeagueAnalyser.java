@@ -21,6 +21,12 @@ public class CricketLeagueAnalyser {
         this.fieldNameComparatorMap.put(EnumField.AVERAGE,Comparator.comparing(census->census.Avg,Comparator.reverseOrder()));
         this.fieldNameComparatorMap.put(EnumField.SixesAndFours,new SortedMethodContainer().reversed());
         this.fieldNameComparatorMap.put(EnumField.StrikeRateSixesAndFours,new SortedMethodContainer().reversed().thenComparing(cencus ->cencus.StrikeRate));
+        Comparator<IPLMostRuns2019DAO> averageComparator=Comparator.comparing(field->field.Avg);
+        Comparator<IPLMostRuns2019DAO> strikingRateComparator=Comparator.comparing(field->field.StrikeRate);
+        Comparator<IPLMostRuns2019DAO> resultOfComparator=averageComparator.thenComparing(strikingRateComparator);
+        this.fieldNameComparatorMap.put(EnumField.StrikeRateWithAvg,resultOfComparator.reversed());
+
+
     }
 
     public int loadIplMostRunCSV(String iplMostRunsCSVFilepath) throws CricketLeagueAnalyserException {
