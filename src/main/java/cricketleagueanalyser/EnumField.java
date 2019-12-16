@@ -1,5 +1,5 @@
 package cricketleagueanalyser;
 
 public enum EnumField {
-    AVERAGE
+    AVERAGE,STRIKERATES
 }

@@ -19,7 +19,7 @@ public class IPLMostRunsCSV {
     public int noOfSixs;
 
     @CsvBindByName(column = "Avg",required =true)
-    public int Average;
+    public Double Average;
 
     @Override
     public String toString() {

@@ -8,7 +8,7 @@ public class IPLMostRuns2019DAO {
     public int fifty;
     public int getNoOffours;
     public int getNoOfSixs;
-    public int Avg;
+    public Double Avg;
 
     public IPLMostRuns2019DAO(IPLMostRunsCSV iplDataCSV) {
         this.position=iplDataCSV.position;
