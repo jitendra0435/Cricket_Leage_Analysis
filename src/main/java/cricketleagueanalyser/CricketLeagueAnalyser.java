@@ -18,6 +18,8 @@ public class CricketLeagueAnalyser {
     public CricketLeagueAnalyser() {
         this.fieldNameComparatorMap=new HashMap();
         this.fieldNameComparatorMap.put(EnumField.STRIKERATES,Comparator.comparing(census->census.StrikeRate,Comparator.reverseOrder()));
+        this.fieldNameComparatorMap.put(EnumField.AVERAGE,Comparator.comparing(census->census.Avg,Comparator.reverseOrder()));
+        this.fieldNameComparatorMap.put(EnumField.SixesAndFours,new SortedMethodContainer().reversed());
     }
 
     public int loadIplMostRunCSV(String iplMostRunsCSVFilepath) throws CricketLeagueAnalyserException {
