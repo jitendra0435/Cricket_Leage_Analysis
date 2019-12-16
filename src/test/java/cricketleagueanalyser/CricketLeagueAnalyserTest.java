@@ -60,13 +60,39 @@ public class CricketLeagueAnalyserTest {
     }
 
     @Test
-    public void givenMethodFor_ReturningTopBattingAveragesFromIPL2019(){
+    public void givenMethodFor_ReturningTopBattingStrikeRateFromIPL2019(){
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
             cricketLeagueAnalyser.loadIplMostRunCSV(IPL2019_SHEET_MOSTRUNS);
             String sortedData=cricketLeagueAnalyser. getTopAverageBattingPlayerName(EnumField.STRIKERATES);
             IPLMostRuns2019DAO[] censusCSV = new Gson().fromJson(sortedData,IPLMostRuns2019DAO[].class);
             Assert.assertEquals("Ishant Sharma", censusCSV[0].player);
+        } catch (CricketLeagueAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenMethodFor_ReturningTopBattingAverageFromIPL2019(){
+        try {
+            CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
+            cricketLeagueAnalyser.loadIplMostRunCSV(IPL2019_SHEET_MOSTRUNS);
+            String sortedData=cricketLeagueAnalyser.getTopAverageBattingPlayerName(EnumField.AVERAGE);
+            IPLMostRuns2019DAO[] cencusCSV=new Gson().fromJson(sortedData,IPLMostRuns2019DAO[].class);
+            Assert.assertEquals("MS Dhoni",cencusCSV[0].player);
+        } catch (CricketLeagueAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenMethodFor_ReturningPlayerWho_hitsMax6sand4s(){
+        try {
+            CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
+            cricketLeagueAnalyser.loadIplMostRunCSV(IPL2019_SHEET_MOSTRUNS);
+            String sortedData=cricketLeagueAnalyser.getTopAverageBattingPlayerName(EnumField.SixesAndFours);
+            IPLMostRuns2019DAO[] censusCSV=new Gson().fromJson(sortedData,IPLMostRuns2019DAO[].class);
+            Assert.assertEquals("Andre Russell",censusCSV[0].player);
         } catch (CricketLeagueAnalyserException e) {
             e.printStackTrace();
         }
