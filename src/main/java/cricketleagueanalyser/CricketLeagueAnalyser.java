@@ -40,7 +40,7 @@ public class CricketLeagueAnalyser {
         return playerHashmap.size();
     }
 
-    public String getTopAverageBattingPlayerName(EnumField field) throws CricketLeagueAnalyserException {
+    public String getSortedPlayerNameByField(EnumField field) throws CricketLeagueAnalyserException {
         if (playerHashmap == null || playerHashmap.size() == 0) {
             throw new CricketLeagueAnalyserException("No Data", CricketLeagueAnalyserException
                     .ExceptionType.CENSUS_FILE_PROBLEM);

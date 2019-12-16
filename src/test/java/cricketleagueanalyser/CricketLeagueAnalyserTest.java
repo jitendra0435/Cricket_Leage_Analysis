@@ -64,7 +64,7 @@ public class CricketLeagueAnalyserTest {
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
             cricketLeagueAnalyser.loadIplMostRunCSV(IPL2019_SHEET_MOSTRUNS);
-            String sortedData=cricketLeagueAnalyser. getTopAverageBattingPlayerName(EnumField.STRIKERATES);
+            String sortedData=cricketLeagueAnalyser.getSortedPlayerNameByField(EnumField.STRIKERATES);
             IPLMostRuns2019DAO[] censusCSV = new Gson().fromJson(sortedData,IPLMostRuns2019DAO[].class);
             Assert.assertEquals("Ishant Sharma", censusCSV[0].player);
         } catch (CricketLeagueAnalyserException e) {
@@ -77,7 +77,7 @@ public class CricketLeagueAnalyserTest {
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
             cricketLeagueAnalyser.loadIplMostRunCSV(IPL2019_SHEET_MOSTRUNS);
-            String sortedData=cricketLeagueAnalyser.getTopAverageBattingPlayerName(EnumField.AVERAGE);
+            String sortedData=cricketLeagueAnalyser.getSortedPlayerNameByField(EnumField.AVERAGE);
             IPLMostRuns2019DAO[] cencusCSV=new Gson().fromJson(sortedData,IPLMostRuns2019DAO[].class);
             Assert.assertEquals("MS Dhoni",cencusCSV[0].player);
         } catch (CricketLeagueAnalyserException e) {
@@ -90,7 +90,7 @@ public class CricketLeagueAnalyserTest {
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
             cricketLeagueAnalyser.loadIplMostRunCSV(IPL2019_SHEET_MOSTRUNS);
-            String sortedData=cricketLeagueAnalyser.getTopAverageBattingPlayerName(EnumField.SixesAndFours);
+            String sortedData=cricketLeagueAnalyser.getSortedPlayerNameByField(EnumField.SixesAndFours);
             IPLMostRuns2019DAO[] censusCSV=new Gson().fromJson(sortedData,IPLMostRuns2019DAO[].class);
             Assert.assertEquals("Andre Russell",censusCSV[0].player);
         } catch (CricketLeagueAnalyserException e) {
