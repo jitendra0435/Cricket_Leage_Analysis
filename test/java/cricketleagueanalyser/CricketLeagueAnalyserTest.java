@@ -253,4 +253,17 @@ public class CricketLeagueAnalyserTest {
         }
     }
 
+    @Test
+    public void givenMethodFor__TopBowlingAverageWithMostWicketsFrom_IPL2019mostWicketCSV() {
+        try {
+            CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+            cricketLeagueAnalyser.loadIPLCSV(CricketLeagueAnalyser.Player.BOWLER,IPL2019_SHEET_MOST_WICKETS);
+            String sortedData = cricketLeagueAnalyser.getSortedPlayerNameByField(EnumField.MAXWICKETSWITHAVERAGE);
+            IPLDAO[] censusCSV = new Gson().fromJson(sortedData, IPLDAO[].class);
+            Assert.assertEquals("Imran Tahir ", censusCSV[98].player);
+        } catch (CricketLeagueAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

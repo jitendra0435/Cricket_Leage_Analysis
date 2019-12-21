@@ -1,5 +1,4 @@
 package cricketleagueanalyser;
-
 import java.util.Map;
 
 public class BowlerAdapter extends IPLAdapter {

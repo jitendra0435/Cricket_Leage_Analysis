@@ -29,6 +29,11 @@ public class CricketLeagueAnalyser {
         Comparator<IPLDAO> maxRuns = Comparator.comparing(cencus -> cencus.runs);
         Comparator<IPLDAO> maxRunsWithAvg = averageComparatorForRuns.thenComparing(maxRuns);
         this.fieldNameComparatorMap.put(EnumField.MaxRunsWithAvg, maxRuns.reversed());
+
+        Comparator<IPLDAO> maxWickets = Comparator.comparing(cencus -> cencus.wickets);
+        Comparator<IPLDAO> average = Comparator.comparing(cencus -> cencus.average);
+        Comparator<IPLDAO> mostWicketWithAvg = maxWickets.thenComparing(average);
+        this.fieldNameComparatorMap.put(EnumField.MAXWICKETSWITHAVERAGE,mostWicketWithAvg);
     }
 
     public Map<String, IPLDAO> loadIPLCSV(Player player, String csvFilePath) throws CricketLeagueAnalyserException {

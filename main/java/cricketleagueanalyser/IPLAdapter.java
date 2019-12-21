@@ -16,7 +16,7 @@ public abstract class IPLAdapter {
     public abstract Map<String, IPLDAO> loadCensusData( CricketLeagueAnalyser.Player player,String csvFilePath) throws CricketLeagueAnalyserException;
     Map<String, IPLDAO> playerHashMap = new HashMap<>();
 
-    protected <E> Map<String,IPLDAO> loadCensusData(Class<E> censusCSVClass, String csvFilePath) throws CricketLeagueAnalyserException {
+    public <E> Map<String,IPLDAO> loadCensusData(Class<E> censusCSVClass, String csvFilePath) throws CricketLeagueAnalyserException {
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             Iterator<E> csvFileIterator = csvBuilder.getCSVFileIterartor(reader,censusCSVClass);
