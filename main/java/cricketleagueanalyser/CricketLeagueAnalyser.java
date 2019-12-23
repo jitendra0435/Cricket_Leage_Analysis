@@ -1,12 +1,14 @@
 package cricketleagueanalyser;
 import com.google.gson.Gson;
 import java.util.*;
+import java.util.stream.Collectors;
+
 import static java.util.stream.Collectors.toCollection;
 
 public class CricketLeagueAnalyser {
     Map<String, IPLDAO> playerHashMap = new HashMap<>();
+    Map<String,IPLDAO>mapAllrounder=new HashMap<>();
     Map<EnumField, Comparator<IPLDAO>> fieldNameComparatorMap = null;
-
     public enum Player {BATSMAN, BOWLER};
     private Player player;
 
@@ -51,5 +53,23 @@ public class CricketLeagueAnalyser {
                 .sorted(this.fieldNameComparatorMap.get(field))
                 .collect(toCollection(ArrayList::new));
         return new Gson().toJson(arrayList);
+    }
+
+    public List<IPLDAO> sortByAvg(Map<String, IPLDAO> batsManAvg, Map<String, IPLDAO> ballAvg, EnumField bestAvgbatBall) {
+
+            for (Map.Entry<String, IPLDAO> entry : batsManAvg.entrySet()
+            ) {
+                for (Map.Entry<String, IPLDAO> entry1 : ballAvg.entrySet()
+                )
+                    if (entry.getKey().equals(entry1.getKey())) {
+                        mapAllrounder.put(entry.getKey(), new IPLDAO(entry.getValue()
+                                .player, entry.getValue()
+                                .average, entry.getValue().ballAverage));
+                    }
+            }
+            List<IPLDAO> sortedPlayer = mapAllrounder.values().stream()
+                    .sorted(fieldNameComparatorMap.get(bestAvgbatBall).reversed())
+                    .collect(Collectors.toList());
+            return sortedPlayer;
     }
 }

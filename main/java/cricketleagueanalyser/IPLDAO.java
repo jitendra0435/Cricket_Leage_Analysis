@@ -22,8 +22,9 @@ public class IPLDAO {
     public double overs;
     public double economy;
     public int wickets;
+    public double ballAverage;
 
-    public IPLDAO() {
+    public IPLDAO(String player, double average, double ballAverage) {
     }
 
     public IPLDAO(IPLMostRunsCSV iplMostRunCsv) {
@@ -46,10 +47,11 @@ public class IPLDAO {
         runs = iplMostWicketsCsv.runs;
         wickets = iplMostWicketsCsv.wickets;
         bestBowlingIn = iplMostWicketsCsv.bestBowlingIn;
-        average = iplMostWicketsCsv.average;
+        average = iplMostWicketsCsv.averageBall;
         economy = iplMostWicketsCsv.economy;
         ballStrikeRate = iplMostWicketsCsv.ballStrikeRate;
         fourWickets = iplMostWicketsCsv.fourWickets;
         fiveWickets = iplMostWicketsCsv.fiveWickets;
+        ballAverage=iplMostWicketsCsv.averageBall;
     }
 }

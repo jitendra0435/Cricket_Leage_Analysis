@@ -25,7 +25,7 @@ public class IPLMostWicketCSV {
     public int bestBowlingIn;
 
     @CsvBindByName(column = "Avg")
-    public double average;
+    public double averageBall;
 
     @CsvBindByName(column = "Econ")
     public double economy;
