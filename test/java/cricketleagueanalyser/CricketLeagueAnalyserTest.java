@@ -3,6 +3,7 @@ import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Map;
 
 public class CricketLeagueAnalyserTest {
@@ -265,5 +266,16 @@ public class CricketLeagueAnalyserTest {
             e.printStackTrace();
         }
     }
-
+    @Test
+    public void givenMethodFor_SortedListOfBoth_ShouldReturnTOPBowlerAndBatsman_ByAverage() {
+        try {
+            CricketLeagueAnalyser cricketLeagueAnalyser= new CricketLeagueAnalyser();
+            Map<String, IPLDAO> batsmanAvg = cricketLeagueAnalyser.loadIPLCSV(CricketLeagueAnalyser.Player.BATSMAN,IPL2019_SHEET_MOST_RUNS);
+            Map<String, IPLDAO> ballAvg = cricketLeagueAnalyser.loadIPLCSV(CricketLeagueAnalyser.Player.BOWLER,IPL2019_SHEET_MOST_WICKETS);
+            List<IPLDAO> ipldaoList = cricketLeagueAnalyser.sortByAvg(batsmanAvg, ballAvg,EnumField.BESTAVGBAT_BALL);
+            Assert.assertEquals("Andre Russell", ipldaoList.get(ipldaoList.size() - 1).player.trim());
+        } catch (CricketLeagueAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
 }
