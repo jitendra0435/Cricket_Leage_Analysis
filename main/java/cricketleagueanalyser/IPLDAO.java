@@ -25,6 +25,9 @@ public class IPLDAO {
     public double ballAverage;
 
     public IPLDAO(String player, double average, double ballAverage) {
+        this.player = player;
+        this.average = average;
+        this.ballAverage = ballAverage;
     }
 
     public IPLDAO(IPLMostRunsCSV iplMostRunCsv) {

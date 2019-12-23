@@ -11,8 +11,9 @@ public class CricketLeagueAnalyser {
     public enum Player {BATSMAN, BOWLER};
     private Player player;
     public CricketLeagueAnalyser() {
-        mapAllrounder=new HashMap<>();
+        this.mapAllrounder = new HashMap<>();
         this.fieldNameComparatorMap = new HashMap();
+
         this.fieldNameComparatorMap.put(EnumField.ECONOMY, Comparator.comparing(census -> census.economy, Comparator.reverseOrder()));
         this.fieldNameComparatorMap.put(EnumField.STRIKERATES, Comparator.comparing(census -> census.batStrikeRate, Comparator.reverseOrder()));
         this.fieldNameComparatorMap.put(EnumField.AVERAGE, Comparator.comparing(census -> census.average, Comparator.reverseOrder()));
@@ -51,19 +52,30 @@ public class CricketLeagueAnalyser {
     }
 
     public List<IPLDAO> sortByAvg(Map<String, IPLDAO> batsManAvg, Map<String, IPLDAO> ballAvg, EnumField field) {
-            for (Map.Entry<String, IPLDAO> entry : batsManAvg.entrySet()
+        for (Map.Entry<String, IPLDAO> batsman : batsManAvg.entrySet()
             ) {
-                for (Map.Entry<String, IPLDAO> entry1 : ballAvg.entrySet()
+            for (Map.Entry<String, IPLDAO> map1 : ballAvg.entrySet()
                 )
-                    if (entry.getKey().equals(entry1.getKey())) {
-                        mapAllrounder.put(entry.getKey(), new IPLDAO(entry.getValue()
-                                .player, entry.getValue()
-                                .average, entry.getValue().ballAverage));
+                if (batsman.getKey().equals(map1.getKey())) {
+                    mapAllrounder.put(batsman.getKey(), new IPLDAO(batsman.getValue()
+                            .player, batsman.getValue()
+                            .average, batsman.getValue().ballAverage));
                     }
             }
             List<IPLDAO> sortedPlayer = mapAllrounder.values().stream()
-                    .sorted(fieldNameComparatorMap.get(field).reversed())
+                    .sorted(fieldNameComparatorMap.get(field))
                     .collect(Collectors.toList());
-            return sortedPlayer;
+        return sortedPlayer;
+    }
+
+    public IPLDAO allRounder(List<IPLDAO> batsmanData, List<IPLDAO> bowlerData) {
+        for (IPLDAO batsman : batsmanData) {
+            for (IPLDAO bowler : bowlerData) {
+                if (batsman.player.trim().equals(bowler.player.trim())) {
+                    return batsman;
+                }
+            }
+        }
+        return null;
     }
 }
