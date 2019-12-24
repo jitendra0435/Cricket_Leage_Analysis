@@ -57,4 +57,7 @@ public class IPLDAO {
         fiveWickets = iplMostWicketsCsv.fiveWickets;
         ballAverage=iplMostWicketsCsv.averageBall;
     }
+
+    public IPLDAO() {
+    }
 }

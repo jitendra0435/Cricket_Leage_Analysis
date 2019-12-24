@@ -8,6 +8,11 @@ public class CricketLeagueAnalyser {
     Map<String, IPLDAO> playerHashMap = new HashMap<>();
     Map<String,IPLDAO> mapAllrounder=null;
     Map<EnumField, Comparator<IPLDAO>> fieldNameComparatorMap = null;
+    public IPLAdapter iplAdapter;
+
+    public CricketLeagueAnalyser(IPLAdapter iplAdapter) {
+        this.iplAdapter = iplAdapter;
+    }
 
     public enum Player {BATSMAN, BOWLER};
     private Player player;

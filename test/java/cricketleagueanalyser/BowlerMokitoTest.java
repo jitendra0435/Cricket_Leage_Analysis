@@ -1,4 +1,4 @@
 package cricketleagueanalyser;
 
-public class IPLmockitoTest {
+public class BowlerMokitoTest {
 }

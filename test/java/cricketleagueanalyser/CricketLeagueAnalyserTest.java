@@ -2,7 +2,6 @@ package cricketleagueanalyser;
 import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.util.List;
 import java.util.Map;
 
@@ -281,16 +280,16 @@ public class CricketLeagueAnalyserTest {
     }
 
     @Test
-        public void givenMessage_SortedListOfBoth_ShouldReturnAllRounderWithRunsAndWickets() {
-            try {
-                CricketLeagueAnalyser cricketLeagueAnalyser= new CricketLeagueAnalyser();
-                cricketLeagueAnalyser.loadIPLCSV(CricketLeagueAnalyser.Player.BATSMAN,IPL2019_SHEET_MOST_RUNS);
-                List<IPLDAO>bat=cricketLeagueAnalyser.sortPlayers(EnumField.ALLROUNDER);
-                cricketLeagueAnalyser.loadIPLCSV(CricketLeagueAnalyser.Player.BOWLER,IPL2019_SHEET_MOST_WICKETS);
-                List<IPLDAO>ball=cricketLeagueAnalyser.sortPlayers(EnumField.ALLROUNDER);
-                IPLDAO ipldaoList = cricketLeagueAnalyser.allRounder(bat, ball);
-                Assert.assertEquals("Andre Russell", ipldaoList.player.trim());
-            } catch (CricketLeagueAnalyserException e) {
-            }
+    public void givenMessage_SortedListOfBoth_ShouldReturnAllRounderWithRunsAndWickets() {
+        try {
+            CricketLeagueAnalyser cricketLeagueAnalyser= new CricketLeagueAnalyser();
+            cricketLeagueAnalyser.loadIPLCSV(CricketLeagueAnalyser.Player.BATSMAN,IPL2019_SHEET_MOST_RUNS);
+            List<IPLDAO>bat=cricketLeagueAnalyser.sortPlayers(EnumField.ALLROUNDER);
+            cricketLeagueAnalyser.loadIPLCSV(CricketLeagueAnalyser.Player.BOWLER,IPL2019_SHEET_MOST_WICKETS);
+            List<IPLDAO>ball=cricketLeagueAnalyser.sortPlayers(EnumField.ALLROUNDER);
+            IPLDAO ipldaoList = cricketLeagueAnalyser.allRounder(bat, ball);
+            Assert.assertEquals("Andre Russell", ipldaoList.player.trim());
+        } catch (CricketLeagueAnalyserException e) {
         }
+    }
 }
