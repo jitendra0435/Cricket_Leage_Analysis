@@ -8,6 +8,7 @@ public class CricketLeagueAnalyser {
     Map<String, IPLDAO> playerHashMap = new HashMap<>();
     Map<String,IPLDAO> mapAllrounder=null;
     Map<EnumField, Comparator<IPLDAO>> fieldNameComparatorMap = null;
+
     public enum Player {BATSMAN, BOWLER};
     private Player player;
     public CricketLeagueAnalyser() {
@@ -32,6 +33,9 @@ public class CricketLeagueAnalyser {
 
         Comparator<IPLDAO> comparing4 = Comparator.comparing(census -> census.average);
         this.fieldNameComparatorMap.put(EnumField.BESTAVGBAT_BALL, comparing4.thenComparing(census -> census.ballAverage).reversed());
+
+        Comparator<IPLDAO> comparing5 = Comparator.comparing(census -> census.wickets);
+        this.fieldNameComparatorMap.put(EnumField.ALLROUNDER, comparing5.thenComparing(census -> census.runs));
     }
 
     public Map<String, IPLDAO> loadIPLCSV(Player player, String csvFilePath) throws CricketLeagueAnalyserException {
@@ -77,5 +81,13 @@ public class CricketLeagueAnalyser {
             }
         }
         return null;
+    }
+
+    public List<IPLDAO>sortPlayers(EnumField field) {
+        List<IPLDAO> sortedPlayer = playerHashMap.values().stream()
+                .sorted(fieldNameComparatorMap.get(field).reversed())
+                .collect(Collectors.toList());
+        return sortedPlayer;
+
     }
 }

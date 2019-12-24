@@ -285,9 +285,9 @@ public class CricketLeagueAnalyserTest {
             try {
                 CricketLeagueAnalyser cricketLeagueAnalyser= new CricketLeagueAnalyser();
                 cricketLeagueAnalyser.loadIPLCSV(CricketLeagueAnalyser.Player.BATSMAN,IPL2019_SHEET_MOST_RUNS);
-                cricketLeagueAnalyser.sortPlayers(EnumField.ALLROUNDER);
+                List<IPLDAO>bat=cricketLeagueAnalyser.sortPlayers(EnumField.ALLROUNDER);
                 cricketLeagueAnalyser.loadIPLCSV(CricketLeagueAnalyser.Player.BOWLER,IPL2019_SHEET_MOST_WICKETS);
-                cricketLeagueAnalyser.sortPlayers(EnumField.ALLROUNDER);
+                List<IPLDAO>ball=cricketLeagueAnalyser.sortPlayers(EnumField.ALLROUNDER);
                 IPLDAO ipldaoList = cricketLeagueAnalyser.allRounder(bat, ball);
                 Assert.assertEquals("Andre Russell", ipldaoList.player.trim());
             } catch (CricketLeagueAnalyserException e) {
