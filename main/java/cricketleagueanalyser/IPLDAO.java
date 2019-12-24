@@ -58,6 +58,14 @@ public class IPLDAO {
         ballAverage=iplMostWicketsCsv.averageBall;
     }
 
+    public IPLDAO(String player,double average, int ballPhase, double ballStrikeRate, double ballAverage) {
+        this.player=player;
+        this.average = average;
+        this.ballPhase = ballPhase;
+        this.ballStrikeRate = ballStrikeRate;
+        this.ballAverage = ballAverage;
+    }
     public IPLDAO() {
+
     }
 }

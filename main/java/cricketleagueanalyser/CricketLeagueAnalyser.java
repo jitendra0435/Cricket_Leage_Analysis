@@ -13,7 +13,6 @@ public class CricketLeagueAnalyser {
     public CricketLeagueAnalyser(IPLAdapter iplAdapter) {
         this.iplAdapter = iplAdapter;
     }
-
     public enum Player {BATSMAN, BOWLER};
     private Player player;
     public CricketLeagueAnalyser() {
@@ -44,10 +43,11 @@ public class CricketLeagueAnalyser {
     }
 
     public Map<String, IPLDAO> loadIPLCSV(Player player, String csvFilePath) throws CricketLeagueAnalyserException {
-        IPLAdapter iplAdapter = IplAdapterFactory.getCensusData(player);
+        //IPLAdapter iplAdapter = IplAdapterFactory.getCensusData(player);
         playerHashMap = iplAdapter.loadCensusData(player, csvFilePath);
         return playerHashMap;
     }
+
 
     public String getSortedPlayerNameByField(EnumField field) throws CricketLeagueAnalyserException {
         if (playerHashMap == null || playerHashMap.size() == 0) {
@@ -59,6 +59,7 @@ public class CricketLeagueAnalyser {
                 .collect(toCollection(ArrayList::new));
         return new Gson().toJson(arrayList);
     }
+
 
     public List<IPLDAO> sortByAvg(Map<String, IPLDAO> batsManAvg, Map<String, IPLDAO> ballAvg, EnumField field) {
         for (Map.Entry<String, IPLDAO> batsman : batsManAvg.entrySet()
@@ -77,6 +78,7 @@ public class CricketLeagueAnalyser {
         return sortedPlayer;
     }
 
+
     public IPLDAO allRounder(List<IPLDAO> batsmanData, List<IPLDAO> bowlerData) {
         for (IPLDAO batsman : batsmanData) {
             for (IPLDAO bowler : bowlerData) {
@@ -88,11 +90,11 @@ public class CricketLeagueAnalyser {
         return null;
     }
 
+
     public List<IPLDAO>sortPlayers(EnumField field) {
         List<IPLDAO> sortedPlayer = playerHashMap.values().stream()
                 .sorted(fieldNameComparatorMap.get(field).reversed())
                 .collect(Collectors.toList());
         return sortedPlayer;
-
     }
 }
